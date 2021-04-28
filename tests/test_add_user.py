@@ -65,3 +65,46 @@ class TestAddUser:
             response = send_request(os.getenv("app_uri"), select_request)
 
         checks.check_users_count(response, 0)
+
+    @allure.title('Add user user without age')
+    def test_add_user_without_age(self):
+        with allure.step('Add user without age'):
+            add_request = {
+                'method': 'add',
+                'id': 'qwerty-204',
+                'name': 'name_without_age',
+                'surname': 'name_without_age',
+                'phone': '202',
+            }
+            response = send_request(os.getenv("app_uri"), add_request)
+        checks.check_response_failure(response)
+        with allure.step(f"Select user by phone {add_request['phone']}"):
+            select_request = {
+                'id': 'qwerty-205',
+                'method': 'select',
+                'phone': add_request['phone']
+            }
+            response = send_request(os.getenv("app_uri"), select_request)
+
+        checks.check_users_absence(response)
+
+    @allure.title('Add user user without name')
+    def test_add_user_without_name(self):
+        with allure.step('Add user without name'):
+            add_request = {
+                'method': 'add',
+                'id': 'qwerty-205',
+                'surname': 'name_without_name',
+                'phone': '203',
+            }
+            response = send_request(os.getenv("app_uri"), add_request)
+        checks.check_response_failure(response)
+        with allure.step(f"Select user by phone {add_request['phone']}"):
+            select_request = {
+                'id': 'qwerty-206',
+                'method': 'select',
+                'phone': add_request['phone']
+            }
+            response = send_request(os.getenv("app_uri"), select_request)
+
+        checks.check_users_absence(response)

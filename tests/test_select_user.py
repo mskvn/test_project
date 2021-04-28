@@ -236,10 +236,23 @@ class TestSelectUser:
 
         with allure.step(f'Select user by name {name_1} and with SQL injection'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-117',
                 'method': 'select',
                 'name': f"{name_1}\"; OR 1=1 --"
             }
             response = send_request(os.getenv("app_uri"), select_request)
 
         checks.check_users_count(response, 0)
+
+    @allure.title('Select users without parameters')
+    def test_select_without_params(self):
+        with allure.step(f'Select user without parameters'):
+            select_request = {
+                'id': 'qwerty-118',
+                'method': 'select'
+            }
+            response = send_request(os.getenv("app_uri"), select_request)
+        checks.check_response_failure(response)
+        with allure.step('Check that app available'):
+            response = send_request(os.getenv("app_uri"), select_request)
+        checks.check_response_failure(response)

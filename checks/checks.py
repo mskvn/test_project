@@ -66,7 +66,7 @@ def check_user_in_response(users, name, surname, age, phone):
 
 @allure.step('Check users absence')
 def check_users_absence(response):
-    assert 'users' not in response, 'Expect that users absense in response'
+    assert 'users' not in response, 'Expect that users absence in response'
 
 
 @allure.title('Check id correct')

@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 import allure
 
@@ -40,7 +40,7 @@ def check_uniq_user_selected(response, name, surname, age):
     # TODO: use soft asserts
     assert user['name'] == name, f"Expect that user name is {name}, but actual is {user['name']}"
     assert user['surname'] == surname, f"Expect that user surname is {surname}, but actual is {user['surname']}"
-    assert user['age'] == age, f"Expect that user age is {name}, but actual is {user['age']}"
+    assert user['age'] == age, f"Expect that user age is {age}, but actual is {user['age']}"
 
 
 @allure.step('Check that reason not empty')
@@ -62,3 +62,14 @@ def check_user_in_response(users, name, surname, age, phone):
             return
     raise AssertionError(f"Cant find user with name='{name}', surname='{surname}', age={age}, phone={phone} "
                          f"in users:\n{json.dumps(users, indent=2)}")
+
+
+@allure.step('Check users absence')
+def check_users_absence(response):
+    assert 'users' not in response, 'Expect that users absense in response'
+
+
+@allure.title('Check id correct')
+def check_id_correct(response, expected_id):
+    assert 'id' in response, 'id key absence in response'
+    assert response['id'] == expected_id, f"Expect thar response with id {expected_id}, but actual is {response['id']}"

@@ -15,7 +15,7 @@ class TestSelectUser:
         with allure.step(f'Add user with phone {phone}'):
             add_request = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-100',
                 'name': 'name__success_response',
                 'surname': 'surname__success_responsee',
                 'age': 18,
@@ -24,11 +24,12 @@ class TestSelectUser:
             send_request(os.getenv("app_uri"), add_request)
         with allure.step(f'Select user by phone {phone}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-101',
                 'method': 'select',
                 'phone': phone
             }
             response = send_request(os.getenv("app_uri"), select_request)
+        checks.check_id_correct(response, select_request['id'])
         checks.check_response_success(response)
 
     @allure.title('Select existed user by phone, user uniq and correct')
@@ -38,7 +39,7 @@ class TestSelectUser:
         with allure.step(f'Add user with phone {phone_1}'):
             add_request = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-100-1',
                 'name': 'name__user_uniq_correct',
                 'surname': 'surname__user_uniq_correct',
                 'age': 18,
@@ -48,7 +49,7 @@ class TestSelectUser:
         with allure.step(f'Add user with phone {phone_2}'):
             add_request = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-101-2',
                 'name': 'name__user_uniq_correct',
                 'surname': 'surname__user_uniq_correct',
                 'age': 18,
@@ -57,7 +58,7 @@ class TestSelectUser:
             send_request(os.getenv("app_uri"), add_request)
         with allure.step(f'Select user by phone {phone_1}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-102',
                 'method': 'select',
                 'phone': phone_1
             }
@@ -69,7 +70,7 @@ class TestSelectUser:
         phone = '102'
         with allure.step(f'Select user by phone {phone}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-103',
                 'method': 'select',
                 'phone': phone
             }
@@ -82,7 +83,7 @@ class TestSelectUser:
         name = 'name__not_exist_user_by_name'
         with allure.step(f'Select user by name {name}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-104',
                 'method': 'select',
                 'name': name
             }
@@ -95,7 +96,7 @@ class TestSelectUser:
         surname = 'surname__not_exist_user_by_surname'
         with allure.step(f'Select user by surname {surname}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-105',
                 'method': 'select',
                 'surname': surname
             }
@@ -110,7 +111,7 @@ class TestSelectUser:
         with allure.step(f'Add user with name {name_1}'):
             add_request = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-106',
                 'name': name_1,
                 'surname': 'surname__one_by_name',
                 'age': 18,
@@ -120,7 +121,7 @@ class TestSelectUser:
         with allure.step(f'Add user with name {name_2}'):
             add_request = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-107',
                 'name': name_2,
                 'surname': 'surname__one_by_name',
                 'age': 18,
@@ -129,7 +130,7 @@ class TestSelectUser:
             send_request(os.getenv("app_uri"), add_request)
         with allure.step(f'Select user by name {name_1}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-108',
                 'method': 'select',
                 'name': name_1
             }
@@ -143,7 +144,7 @@ class TestSelectUser:
         with allure.step(f'Add user with surname {surname_1}'):
             add_request = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-109',
                 'name': 'name__one_by_surname',
                 'surname': surname_1,
                 'age': 18,
@@ -153,7 +154,7 @@ class TestSelectUser:
         with allure.step(f'Add user with surname {surname_2}'):
             add_request = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-110',
                 'name': 'name__one_by_surname',
                 'surname': surname_2,
                 'age': 18,
@@ -162,7 +163,7 @@ class TestSelectUser:
             send_request(os.getenv("app_uri"), add_request)
         with allure.step(f'Select user by surname {surname_1}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-111',
                 'method': 'select',
                 'surname': surname_1
             }
@@ -175,7 +176,7 @@ class TestSelectUser:
         with allure.step(f'Add user with name {name}'):
             add_request_1 = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-112',
                 'name': name,
                 'surname': 'surname__select_few_users__by_name_1',
                 'age': 18,
@@ -185,7 +186,7 @@ class TestSelectUser:
         with allure.step(f'Add user with the same name {name}'):
             add_request_2 = {
                 'method': 'add',
-                'id': 'qwerty-123',
+                'id': 'qwerty-113',
                 'name': name,
                 'surname': 'surname__select_few_users__by_name_2',
                 'age': 18,
@@ -194,7 +195,7 @@ class TestSelectUser:
             send_request(os.getenv("app_uri"), add_request_2)
         with allure.step(f'Select user by name {name}'):
             select_request = {
-                'id': 'id',
+                'id': 'qwerty-114',
                 'method': 'select',
                 'name': name
             }
@@ -207,3 +208,38 @@ class TestSelectUser:
                                           name=user['name'],
                                           surname=user['surname'],
                                           phone=user['phone'])
+
+    @allure.title('SQL injection OR 1=1')
+    def test_select_sql_injection(self):
+        name_1 = 'name__sql_injection_1'
+        with allure.step(f'Add user with name {name_1}'):
+            add_request_1 = {
+                'method': 'add',
+                'id': 'qwerty-115',
+                'name': name_1,
+                'surname': 'surname__sql_injection_1',
+                'age': 18,
+                'phone': '109'
+            }
+            send_request(os.getenv("app_uri"), add_request_1)
+        name_2 = 'name__sql_injection_2'
+        with allure.step(f'Add user with name {name_2}'):
+            add_request = {
+                'method': 'add',
+                'id': 'qwerty-116',
+                'name': name_2,
+                'surname': 'surname__sql_injection_2',
+                'age': 18,
+                'phone': '110'
+            }
+            send_request(os.getenv("app_uri"), add_request)
+
+        with allure.step(f'Select user by name {name_1} and with SQL injection'):
+            select_request = {
+                'id': 'id',
+                'method': 'select',
+                'name': f"{name_1}\"; OR 1=1 --"
+            }
+            response = send_request(os.getenv("app_uri"), select_request)
+
+        checks.check_users_count(response, 0)

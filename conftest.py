@@ -20,7 +20,7 @@ def pytest_addoption(parser):
 
 
 @allure.title('Start app')
-@pytest.fixture(scope='session', autouse=True)
+@pytest.fixture(scope='class', autouse=True)
 def start_app(pytestconfig):
     app_bin_path = pytestconfig.getoption('--app_bin_path')
     port = pytestconfig.getoption('--app_port')

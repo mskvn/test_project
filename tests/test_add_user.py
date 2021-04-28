@@ -6,7 +6,7 @@ from api.request import send_request
 from checks.checks import check_response_success, check_user_added
 
 
-@allure.suite('Add method')
+@allure.suite('Add user')
 class TestAddUser:
 
     @allure.title('Add new user, correct')
@@ -18,7 +18,7 @@ class TestAddUser:
                 'name': 'test_name',
                 'surname': 'test_surname',
                 'age': 18,
-                'phone': '112'
+                'phone': '200'
             }
             response = send_request(os.getenv("app_uri"), request)
 

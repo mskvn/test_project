@@ -2,3 +2,6 @@
 .pytest_cache
 __pycache__
 allure-results
+docker/tmp
+!docker/tmp/.keep
+.cache

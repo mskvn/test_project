@@ -1,6 +1,7 @@
 import os
 import signal
 import subprocess
+import sys
 import time
 
 import allure
@@ -47,6 +48,10 @@ def start_app(pytestconfig):
                                     detach=True)
 
     else:
+        if sys.platform != 'linux':
+            raise Exception('Tested app support linux based system only. Run tests with option --start_app_in_docker '
+                            'for start app in docker container with linux based system')
+
         cmd = f'{app_abs_bin_path} {host} {port}'
         print(cmd)
         app = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid)
